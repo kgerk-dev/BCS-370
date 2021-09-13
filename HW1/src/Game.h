@@ -3,8 +3,8 @@ class Game
 {
 	//Members = Title, ESRB, and Price for Game Class
 private:
-	std::string title, esrb;
-	double price;
+	std::string m_title, m_esrb;
+	double m_price;
 
 public:
 	/*************** Constructors *******************/

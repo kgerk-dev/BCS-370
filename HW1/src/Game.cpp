@@ -1,21 +1,25 @@
 #include "Game.h"
 
 //Defining the Default Constructor
-Game::Game() {	}
+Game::Game() {
+	m_title = "Unassigned";
+	m_esrb = "None";
+	m_price = "0.0";
+}
 //Defining Paramaterized constructor
 Game::Game(std::string title, std::string esrb, double price)
 {
-	m_title = title;
-	esrb = "Everyone";
-	price = 0.00;
+	title = m_title;
+	esrb = m_esrb;
+	price = m_price;
 }
 //Defining the Copy Constructor
 Game::Game(const Game& obj)
 {
 	//Needs Work Don't Understand Copy Constructors fully. 
-	title = obj.title;
-	esrb = obj.esrb;
-	price = obj.price;
+	m_title = obj.title;
+	m_esrb = obj.esrb;
+	m_price = obj.price;
 }
 
 /************* Setters ****************/
@@ -34,13 +38,13 @@ void Game::setPrice(double d) {
 /************* Getters ****************/
 
 std::string Game::getTitle() {
-	return title;
+	return m_title;
 }
 
 std::string Game::getEsrb() {
-	return esrb;
+	return m_esrb;
 }
 
 double Game::getPrice() {
-	return price;
+	return m_price;
 }
