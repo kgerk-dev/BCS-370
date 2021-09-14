@@ -1,4 +1,5 @@
 #pragma once
+
 class Game
 {
 	//Members = Title, ESRB, and Price for Game Class
@@ -23,10 +24,17 @@ public:
 	void setPrice(double d);
 
 	/*************** Getters ***********************/
-	std::string getTitle();
+	std::string Game::getTitle() const;
 
-	std::string getEsrb();
+	std::string Game::getEsrb() const ;
 
-	double getPrice();
+	double Game::getPrice() const;
+
+	/********* Assignment overloads ************/
+	//Member overload
+	friend Game& operator=(const Game& rhs);
+
+	//Non-Member overload
+	friend std::ostream& operator<<(std::ostream& os, Game& g);
 };
 

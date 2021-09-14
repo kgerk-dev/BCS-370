@@ -1,12 +1,12 @@
 #pragma once
 
-
 class GameStorage
 {
 
 private:
 	
 	int index;
+	Game gameList[];
 
 public:
 	//Controls number of Games in gameList[];
@@ -20,7 +20,7 @@ public:
 
 	void setGameStorage(int index, Game g);
 
-	void getGameStorage(int index);
+	void getGameStorage(int index) const;
 
 	int gamePriceCount(double lowerbound, double upperbound);
 

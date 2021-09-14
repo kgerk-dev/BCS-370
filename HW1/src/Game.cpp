@@ -23,28 +23,49 @@ Game::Game(const Game& obj)
 }
 
 /************* Setters ****************/
-void Game::setTitle(std::string t) {
-	title = t;
+void Game::setTitle(std::string title) {
+	m_title = title;
 }
 
-void Game::setEsrb(std::string e) {
-	esrb = e;
+void Game::setEsrb(std::string esrb) {
+	m_esrb = esrb;
 }
 
-void Game::setPrice(double d) {
-	price = d;
+void Game::setPrice(double price) {
+	m_price = price ;
 }
 
 /************* Getters ****************/
 
-std::string Game::getTitle() {
+std::string Game::getTitle() const
+{
 	return m_title;
 }
 
-std::string Game::getEsrb() {
+std::string Game::getEsrb() const 
+{
 	return m_esrb;
 }
 
-double Game::getPrice() {
+double Game::getPrice() const
+{
 	return m_price;
+}
+
+const Game& Game::operator=(const Game& rhs) 
+{
+	m_title = rhs.m_title;
+	m_esrb = rhs.m_esrb;
+	m_price = rhs.m_price;
+
+	return *this;
+}
+
+std::ostream& operator<<(std::ostream& os, Game& g)
+{
+	os << g.m_title << std::endl;
+	os << g.m_esrb << std::endl;
+	os << g.m_price << std::endl;
+
+	return *this;
 }
