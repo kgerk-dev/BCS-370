@@ -17,9 +17,9 @@ Game::Game(std::string title, std::string esrb, double price)
 Game::Game(const Game& obj)
 {
 	//Needs Work Don't Understand Copy Constructors fully. 
-	m_title = obj.title;
-	m_esrb = obj.esrb;
-	m_price = obj.price;
+	m_title = obj.m_title;
+	m_esrb = obj.m_esrb;
+	m_price = obj.m_price;
 }
 
 /************* Setters ****************/
@@ -52,13 +52,14 @@ double Game::getPrice() const
 	return m_price;
 }
 
-const Game& Game::operator=(const Game& rhs) 
+
+Game& operator=(const Game& rhs)
 {
 	m_title = rhs.m_title;
 	m_esrb = rhs.m_esrb;
 	m_price = rhs.m_price;
 
-	return *this;
+	return *this
 }
 
 std::ostream& operator<<(std::ostream& os, Game& g)

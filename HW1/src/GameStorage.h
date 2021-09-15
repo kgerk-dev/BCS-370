@@ -1,15 +1,17 @@
 #pragma once
 
+#include <iostream>
+#include <array>
+
 class GameStorage
 {
-
+	const int SIZE = 20;
 private:
 	
-	int index;
-	Game gameList[];
+	Game gameList[SIZE];
 
 public:
-	//Controls number of Games in gameList[];
+	
 	
 
 	//Default Constructor
@@ -26,7 +28,7 @@ public:
 
 	Game mostExpensive();
 
-	bool findByTitle(std::string name, Game & g);
+	bool findByTitle(std::string name, Game& g);
 
 	double priceTotal();
 

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+
+
+
 class Game
 {
 	//Members = Title, ESRB, and Price for Game Class
