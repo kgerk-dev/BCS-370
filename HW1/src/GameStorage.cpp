@@ -1,10 +1,10 @@
 #include "GameStorage.h"
 #include "Game.h"
 
-//Constructors
+
 GameStorage::GameStorage();
 
-//Functions
+
 void GameStorage::setGameStorage(int index, Game g)
 {
 	
@@ -12,6 +12,7 @@ void GameStorage::setGameStorage(int index, Game g)
 
 void GameStorage::getGameStorage(int index) const
 {
+
 }
 
 int GameStorage::gamePriceCount(double lowerbound, double upperbound)
