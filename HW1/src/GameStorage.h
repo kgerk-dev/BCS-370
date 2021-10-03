@@ -1,32 +1,32 @@
 #pragma once
 
+#include "Game.h"
+
 #include <iostream>
-#include <array>
+
+
 
 class GameStorage
 {
 	
+	
 private:
 	
-	Game gameList[];
+	Game* gameList; //points to array
+	//static Game games[SIZE];
+	int length;
+	int nextIndex;
 
 public:
 	
-	
 	//Default Constructor
-	GameStorage()
-	{
-		gameList[] = 0;
-	};	//Paramaters and other members?
+	GameStorage();
 
-	void setGameStorage(size_t index, Game g);
-	/*
-	Sets the value at the given index to the given Game.
-	You should test the index to make sure that it is valid. If the index is not valid then
-	do not set the value.
-	*/
+	~GameStorage();
 
-	void getGameStorage(size_t index) const;
+	void Set(int index, Game games);
+	
+	const Game& Get(int index);
 
 	int gamePriceCount(double lowerbound, double upperbound);
 

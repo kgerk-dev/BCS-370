@@ -1,14 +1,33 @@
 #pragma once
+//****************************************************
+//File: Game.h
+//
+//Purpose: Creates Game identifiers.
+//
+//Written by: Kyle Gerken
+//
+//Compiler: Visual C++ 2019
+//
+//
+//
+//
+//
+//
+//****************************************************
+
+
+
 
 #include <iostream>
-
-
+#include <string>
+#include <iomanip>
 
 class Game
 {
 	//Members = Title, ESRB, and Price for Game Class
 private:
-	std::string m_title, m_esrb;
+	std::string m_title;
+	std::string m_esrb;
 	double m_price;
 
 public:
@@ -21,24 +40,24 @@ public:
 	Game(const Game& obj);
 
 	/**************** Setters *********************/
-	void setTitle(std::string s);
+	void setTitle(std::string title);
 
-	void setEsrb(std::string s);
+	void setEsrb(std::string esrb);
 
 	void setPrice(double d);
 
 	/*************** Getters ***********************/
-	std::string Game::getTitle() const;
+	std::string getTitle();
 
-	std::string Game::getEsrb() const ;
+	std::string getEsrb();
 
-	double Game::getPrice() const;
+	double getPrice();
 
 	/********* Assignment overloads ************/
 	//Member overload
-	friend Game& operator=(const Game& rhs);
+	Game& operator=(const Game& rhs);
 
 	//Non-Member overload
-	friend std::ostream& operator<<(std::ostream& os, Game& g);
+	friend std::ostream& operator<<(std::ostream& os, const Game& g);
 };
 
