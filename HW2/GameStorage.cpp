@@ -32,20 +32,46 @@
 // 
 // Update Information:
 // ------------------------------------------
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Changed static array of gameList[] to a Dynamic Array with Deallocation in Destructor.
 // 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 GameStorage::GameStorage() {
 
 	//should add new game to Game storage
-	gameList = new Game[3];
-	for (int i = 0; i < 3; i++) {
+	SIZE = new int;
+	*SIZE = 10;
+	gameList = new Game[*SIZE];
+
+	for (int i = 0; i < *SIZE; i++) {
 		gameList[i].getTitle();
 		gameList[i].getEsrb();
 		gameList[i].getPrice();
 	}
-	length = 3;
+
 	nextIndex = 0;
 	//std::cout << "Default Constructor called: GameStorage" << std::endl;
+}
+
+GameStorage::GameStorage(int &newSize)
+{
+	*SIZE = newSize;
+	gameList = new Game[*SIZE];
+	for (int i = 0; i < *SIZE; i++) {
+		gameList[i].getTitle();
+		gameList[i].getEsrb();
+		gameList[i].getPrice();
+	}
+	nextIndex = 0;
+}
+
+GameStorage::GameStorage(const GameStorage& copy)
+{
+	*gameList = *copy.gameList;
 }
 
 
@@ -56,12 +82,12 @@ GameStorage::GameStorage() {
 //Purpose: Deallocates dynamic array of Game
 //
 //Update Information:
-//
+//------------------------------------------
 //
 //******************************************
 GameStorage::~GameStorage() {
 
-	delete[] gameList;
+	delete [] gameList;
 	gameList = nullptr;
 
 }
@@ -74,13 +100,15 @@ GameStorage::~GameStorage() {
 //Purpose: Sets the indicated Game into the index position of the Gamestorage collection.
 //
 //Update Information:
+//-----------------------------------------
 //
-//
-//
+//Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //******************************************
 void GameStorage::Set(int index, Game g)
 {
-	if (index < 3) {
+	if (index < *SIZE) {
 		gameList[index] = g;
 	}
 	else {
@@ -96,7 +124,7 @@ void GameStorage::Set(int index, Game g)
 //Purpose: Returns the index Position of the Game in the GameStorage Collection
 //
 //Update Information:
-//
+//-----------------------------------------
 //
 //
 //******************************************
@@ -114,12 +142,14 @@ const Game& GameStorage::Get(int index)
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 {
 	int count = 0;
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < *SIZE; i++)
 	{
 		if (gameList[i].getPrice() > lowerbound && gameList[i].getPrice() < upperbound)
 			count++;
@@ -137,7 +167,9 @@ int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 Game& GameStorage::mostExpensive()
 {
@@ -145,7 +177,7 @@ Game& GameStorage::mostExpensive()
 	int num = 0;
 	int i = 0;
 
-	for (i = 0; i < 3; i++) {
+	for (i = 0; i < *SIZE; i++) {
 
 		if (gameList[i].getPrice() > price) {
 
@@ -166,11 +198,13 @@ Game& GameStorage::mostExpensive()
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 bool GameStorage::findByTitle(std::string name, Game& g)
 {
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < *SIZE; i++) {
 		if (name == g.getTitle()) {
 			return &g;
 		}
@@ -190,12 +224,14 @@ bool GameStorage::findByTitle(std::string name, Game& g)
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 double GameStorage::priceTotal()
 {
 	double sum = 0.0;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < *SIZE; i++) {
 		sum += gameList[i].getPrice();
 	}
 	return sum;
@@ -210,12 +246,14 @@ double GameStorage::priceTotal()
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 int GameStorage::size()
 {
 	//(N[SIZE]/N[0]) +1 
-	int size = (sizeof(gameList[3]) / sizeof(gameList[0])) + 1;
+	int size = (sizeof(gameList[*SIZE]) / sizeof(gameList[0])) + 1;
 
 	return size;
 }
@@ -229,11 +267,13 @@ int GameStorage::size()
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10/3/2021
+// Description: Added Size as the Array length. 
 //*****************************************************
 void GameStorage::initialize()
 {
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < *SIZE; i++) {
 
 		gameList[i].setTitle("NoTitle");
 		gameList[i].setEsrb("NoESRB");

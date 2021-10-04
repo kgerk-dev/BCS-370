@@ -33,13 +33,17 @@ private:
 
 	Game* gameList; //points to array
 	//static Game games[SIZE];
-	int length;
+	int *SIZE;
 	int nextIndex;
 
 public:
 
 	//**************** Constructors/Destructors ***************************
 	GameStorage();
+
+	GameStorage(int &);
+
+	GameStorage(const GameStorage& copy);
 
 	~GameStorage();
 

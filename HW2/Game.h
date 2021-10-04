@@ -31,9 +31,9 @@ class Game
 {
 	//Members = Title, ESRB, and Price for Game Class
 private:
-	std::string m_title;
-	std::string m_esrb;
-	double m_price;
+	std::string *m_title;
+	std::string *m_esrb;
+	double *m_price;
 
 public:
 	/*************** Constructors *******************/
@@ -43,6 +43,9 @@ public:
 	Game(std::string title, std::string esrb, double price);
 	//Copy Constructor
 	Game(const Game& obj);
+
+	//Destructor
+	~Game();
 
 	/**************** Setters *********************/
 	void setTitle(std::string title);
@@ -62,8 +65,8 @@ public:
 	//Member overload
 	Game& operator=(const Game& rhs);
 
-	//Non-Member overload
-	friend std::ostream& operator<<(std::ostream& os, const Game& g);
+	//Non-Member overloads
+	friend std::ostream& operator<<(std::ostream& os, const Game& rhs);
+
+	friend std::istream& operator>>(std::istream& is, const Game& rhs);
 };
-
-
