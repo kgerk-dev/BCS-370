@@ -30,7 +30,7 @@ public:
 
 	int gamePriceCount(double lowerbound, double upperbound);
 
-	Game mostExpensive();
+	Game& mostExpensive();
 
 	bool findByTitle(std::string name, Game& g);
 
@@ -42,6 +42,5 @@ public:
 
 	std::string getAuthor();
 
-	
 };
 

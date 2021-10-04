@@ -94,19 +94,22 @@ int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 	return count;
 }
 
-Game GameStorage::mostExpensive()
+Game& GameStorage::mostExpensive()
 {
-	int max = 0;
+	double price = 0;
+	int num= 0;
+	int i=0;
 
-	for (int i = 0; i < 3; i++) {
+	for (i = 0; i < 3; i++) {
 
-		if (gameList[i].getPrice() > 0.0) {
+		if (gameList[i].getPrice() > price) {
 
-			max = gameList[i].getPrice();
+			price = gameList[i].getPrice();
+			num = i;
 		}
 	}
-
-	return gameList[max];
+	
+	return gameList[num];
 }
 
 bool GameStorage::findByTitle(std::string name, Game& g)
@@ -144,7 +147,7 @@ double GameStorage::priceTotal()
 
 int GameStorage::size()
 {
-	//Points to size of Array (&n+1) Double check for correct arithmetic.
+	 //(N[SIZE]/N[0]) +1 
 	int size = (sizeof(gameList[3]) / sizeof(gameList[0])) + 1;
 
 	return size;
