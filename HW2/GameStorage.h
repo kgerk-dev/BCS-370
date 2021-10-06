@@ -31,19 +31,19 @@ private:
 
 	Game* gameList; //points to array
 	//static Game games[SIZE];
-	int *SIZE;
+	
 	//used as iterator
 	//int length;
 	//used as next position iterator.
 	//int nextIndex;
-	
+
 
 public:
-
+	int SIZE = 10;
 	//**************** Constructors/Destructors ***************************
 	GameStorage();
 
-	GameStorage(int &);
+	GameStorage(int&);
 
 	GameStorage(const GameStorage& copy);
 
@@ -69,10 +69,12 @@ public:
 	//Returns Author of Game Collection
 	std::string getAuthor();
 	//resizes the array used, can be smaller or larger
-	void reSize(int );
+	void reSize(int);
 	//Creates a deep copy of primary list into a new list
 	GameStorage* deepCopy();
 	//overloads assignment operator for gamestorage
 	GameStorage& operator=(const GameStorage& rhs);
 	//overlaods extraction operator for GameStroage to output list into console.
 	friend std::ostream& operator<<(std::ostream& os, GameStorage& rhs);
+
+};

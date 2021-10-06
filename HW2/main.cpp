@@ -14,6 +14,7 @@
 // Update Information:
 //*******************************************************
 
+
 void testGame(Game&);
 
 
@@ -22,6 +23,7 @@ int main() {
 	//Declare Games and Game List Tests
 	//Default GameStorage constructor test
 	GameStorage* list = nullptr;
+	//how to specify? new locl or reuse GameStorage::SIZE
 	list = new GameStorage[];
 
 	list->size();

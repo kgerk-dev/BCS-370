@@ -43,9 +43,9 @@
 GameStorage::GameStorage() {
 
 	//should add new game to Game storage
-	SIZE = new int;
-	*SIZE = 10;
-	gameList = new Game[*SIZE];
+	
+	
+	gameList = new Game[SIZE];
 	//length = *SIZE; //dereferencing Size;
 	//nextIndex = 0;
 	//std::cout << "Default Constructor called: GameStorage" << std::endl;
@@ -64,8 +64,8 @@ GameStorage::GameStorage() {
 //*****************************************************
 GameStorage::GameStorage(int &newSize)
 {
-	*SIZE = newSize;
-	gameList = new Game[*SIZE];
+	SIZE = newSize;
+	gameList = new Game[SIZE];
 	
 	//nextIndex = 0;
 }
@@ -84,10 +84,10 @@ GameStorage::GameStorage(int &newSize)
 //*****************************************************
 GameStorage::GameStorage(const GameStorage& copy)
 {
-	SIZE = new int;
+	
 	gameList = new Game;
 	*gameList = *copy.gameList;
-	*SIZE = *copy.SIZE;
+	SIZE = copy.SIZE;
 }
 
 
@@ -124,7 +124,7 @@ GameStorage::~GameStorage() {
 //******************************************
 void GameStorage::Set(int index, Game g)
 {
-	if (index < *SIZE) {
+	if (index < SIZE) {
 		gameList[index] = g;
 	}
 	else {
@@ -165,7 +165,7 @@ const Game& GameStorage::Get(int index)
 int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 {
 	int count = 0;
-	for (int i = 0; i < *SIZE; i++)
+	for (int i = 0; i < SIZE; i++)
 	{
 		if (gameList[i].getPrice() > lowerbound && gameList[i].getPrice() < upperbound)
 			count++;
@@ -193,7 +193,7 @@ Game& GameStorage::mostExpensive()
 	int num = 0;
 	int i = 0;
 
-	for (i = 0; i < *SIZE; i++) {
+	for (i = 0; i < SIZE; i++) {
 
 		if (gameList[i].getPrice() > price) {
 
@@ -220,7 +220,7 @@ Game& GameStorage::mostExpensive()
 //*****************************************************
 bool GameStorage::findByTitle(std::string name, Game& g)
 {
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 		if (name == g.getTitle()) {
 			return &g;
 		}
@@ -247,7 +247,7 @@ bool GameStorage::findByTitle(std::string name, Game& g)
 double GameStorage::priceTotal()
 {
 	double sum = 0.0;
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 		sum += gameList[i].getPrice();
 	}
 	return sum;
@@ -269,7 +269,7 @@ double GameStorage::priceTotal()
 int GameStorage::size()
 {
 	//(N[SIZE]/N[0]) +1 
-	int size = (sizeof(gameList[*SIZE]) / sizeof(gameList[0])) + 1;
+	int size = (sizeof(gameList[SIZE]) / sizeof(gameList[0])) + 1;
 
 	return size;
 }
@@ -289,7 +289,7 @@ int GameStorage::size()
 //*****************************************************
 void GameStorage::initialize()
 {
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 
 		gameList[i].setTitle("NoTitle");
 		gameList[i].setEsrb("NoESRB");
@@ -320,25 +320,25 @@ void GameStorage::reSize(int newSize)
 {
 	Game *newArr;
 	
-	if (newSize >= *SIZE) 
+	if (newSize >= SIZE) 
 	{
 		newArr = new Game[newSize];
-		for (int i = 0; i < *SIZE; i++) {
+		for (int i = 0; i < SIZE; i++) {
 			gameList[i] = newArr[i];
 		}
-		*SIZE = newSize;
+		SIZE = newSize;
 		delete[] gameList;
 		gameList = newArr;
 
 	}
-	else if (newSize <= *SIZE) 
+	else if (newSize <= SIZE) 
 	{
 		newArr = new Game[newSize];
 		for (int j = 0; j < newSize; j++) 
 		{
 			gameList[j] = newArr[j];
 		}
-		*SIZE = newSize;
+		SIZE = newSize;
 		delete[] gameList;
 		gameList = newArr;
 	}
@@ -354,16 +354,20 @@ GameStorage& GameStorage::operator=(const GameStorage& rhs)
 		return *this;
 	}
 
-	*this->SIZE = *rhs.SIZE;
+	//Should this be SIZE or *SIZE?? *SIZE was 
+	//depracated due to no reason it couldn't be static.
+	this->SIZE = rhs.SIZE;
 	*this->gameList = *rhs.gameList;
 
 }
 
 std::ostream& operator<<(std::ostream& os, GameStorage& rhs) {
 	std::cout << "\n------------GameStorage List---------------\n";
-	std::cout << "Size of List: " << *rhs.SIZE << std::endl;
-	for (int i = 0; i < *rhs.SIZE; i++) {
+	std::cout << "Size of List: " << rhs.SIZE << std::endl;
+	for (int i = 0; i < rhs.SIZE; i++) {
 		std::cout << ". " << std::endl;
 	}
+
+	return os;
 }
 
