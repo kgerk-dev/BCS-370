@@ -43,7 +43,6 @@ public:
 	Game(std::string title, std::string esrb, double price);
 	//Copy Constructor
 	Game(const Game& obj);
-
 	//Destructor
 	~Game();
 

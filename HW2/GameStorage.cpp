@@ -46,32 +46,48 @@ GameStorage::GameStorage() {
 	SIZE = new int;
 	*SIZE = 10;
 	gameList = new Game[*SIZE];
-
-	for (int i = 0; i < *SIZE; i++) {
-		gameList[i].getTitle();
-		gameList[i].getEsrb();
-		gameList[i].getPrice();
-	}
-
-	nextIndex = 0;
+	//length = *SIZE; //dereferencing Size;
+	//nextIndex = 0;
 	//std::cout << "Default Constructor called: GameStorage" << std::endl;
 }
 
+
+
+//*****************************************************
+//Function: GameStorage Paramterized Constructor Constructor
+// 
+// Purpose: Initializes Game array with a set value for SIZE
+// 
+// Update Information:
+// ------------------------------------------
+// 
+//*****************************************************
 GameStorage::GameStorage(int &newSize)
 {
 	*SIZE = newSize;
 	gameList = new Game[*SIZE];
-	for (int i = 0; i < *SIZE; i++) {
-		gameList[i].getTitle();
-		gameList[i].getEsrb();
-		gameList[i].getPrice();
-	}
-	nextIndex = 0;
+	
+	//nextIndex = 0;
 }
 
+//*****************************************************
+//Function: GameStorage Copy Constructor
+// 
+// Purpose: Copys value of Obj 1 (lhs) to passed in Obj 2(rhs or copy)
+// 
+// Update Information:
+// ------------------------------------------
+// Name: Kyle Gekren
+// Date: 10/5/2021
+// Description: Changed object variables to pointers. Created new allocations of SIZE and gameList. 
+//				Performed a deep copy by dereferencing gameList & SIZE into the object seeking a copy.
+//*****************************************************
 GameStorage::GameStorage(const GameStorage& copy)
 {
+	SIZE = new int;
+	gameList = new Game;
 	*gameList = *copy.gameList;
+	*SIZE = *copy.SIZE;
 }
 
 
@@ -169,7 +185,7 @@ int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added Size as the Array length. 
+// Description: Added a pointer to Size as the Array length. 
 //*****************************************************
 Game& GameStorage::mostExpensive()
 {
@@ -200,7 +216,7 @@ Game& GameStorage::mostExpensive()
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added Size as the Array length. 
+// Description: Added a pointer to Size as the Array length. 
 //*****************************************************
 bool GameStorage::findByTitle(std::string name, Game& g)
 {
@@ -226,7 +242,7 @@ bool GameStorage::findByTitle(std::string name, Game& g)
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added Size as the Array length. 
+// Description: Added a pointer to Size as the Array length. 
 //*****************************************************
 double GameStorage::priceTotal()
 {
@@ -248,7 +264,7 @@ double GameStorage::priceTotal()
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added Size as the Array length. 
+// Description: Added a pointer to Size as the Array length. 
 //*****************************************************
 int GameStorage::size()
 {
@@ -269,7 +285,7 @@ int GameStorage::size()
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added Size as the Array length. 
+// Description: Added a pointer to Size as the Array length. 
 //*****************************************************
 void GameStorage::initialize()
 {
@@ -298,3 +314,56 @@ std::string GameStorage::getAuthor()
 	std::string author = "Author: Kyle Gerken\n";
 	return author;
 }
+
+
+void GameStorage::reSize(int newSize) 
+{
+	Game *newArr;
+	
+	if (newSize >= *SIZE) 
+	{
+		newArr = new Game[newSize];
+		for (int i = 0; i < *SIZE; i++) {
+			gameList[i] = newArr[i];
+		}
+		*SIZE = newSize;
+		delete[] gameList;
+		gameList = newArr;
+
+	}
+	else if (newSize <= *SIZE) 
+	{
+		newArr = new Game[newSize];
+		for (int j = 0; j < newSize; j++) 
+		{
+			gameList[j] = newArr[j];
+		}
+		*SIZE = newSize;
+		delete[] gameList;
+		gameList = newArr;
+	}
+}
+
+GameStorage* GameStorage::deepCopy() {
+
+}
+
+GameStorage& GameStorage::operator=(const GameStorage& rhs)
+{
+	if (this == &rhs) {
+		return *this;
+	}
+
+	*this->SIZE = *rhs.SIZE;
+	*this->gameList = *rhs.gameList;
+
+}
+
+std::ostream& operator<<(std::ostream& os, GameStorage& rhs) {
+	std::cout << "\n------------GameStorage List---------------\n";
+	std::cout << "Size of List: " << *rhs.SIZE << std::endl;
+	for (int i = 0; i < *rhs.SIZE; i++) {
+		std::cout << ". " << std::endl;
+	}
+}
+
