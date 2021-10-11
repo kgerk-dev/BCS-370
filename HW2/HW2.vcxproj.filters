@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main_HW2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="Game_HW2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameStorage.cpp">
+    <ClCompile Include="GameStorage_HW2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Game_HW2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameStorage.h">
+    <ClInclude Include="GameStorage_HW2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

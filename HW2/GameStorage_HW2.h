@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game.h"
+#include "Game_HW2.h"
 
 #include <iostream>
 
@@ -31,19 +31,20 @@ private:
 
 	Game* gameList; //points to array
 	//static Game games[SIZE];
-	int *SIZE;
+	
+	
 	//used as iterator
-	//int length;
+	
 	//used as next position iterator.
 	//int nextIndex;
-	
+
 
 public:
-
+	static int SIZE;
 	//**************** Constructors/Destructors ***************************
 	GameStorage();
 
-	GameStorage(int &);
+	GameStorage(int&);
 
 	GameStorage(const GameStorage& copy);
 
@@ -52,27 +53,39 @@ public:
 	//*************** Member Functions *********************************
 	//Sets index for game
 	void Set(int index, Game games);
+
 	//Gets index of game
 	const Game& Get(int index);
+
 	//Returns num of games between price range
 	int gamePriceCount(double lowerbound, double upperbound);
+
 	//Returns most expensive game, by price
 	Game& mostExpensive();
+
 	//T/F if game title is correct
 	bool findByTitle(std::string name, Game& g);
+
 	//Returns sum of all games by price
 	double priceTotal();
+
 	//Returns size of storage collection
 	int size();
+
 	//Rests games info to default values
 	void initialize();
+
 	//Returns Author of Game Collection
 	std::string getAuthor();
+
 	//resizes the array used, can be smaller or larger
-	void reSize(int );
+	void reSize(size_t);
+
 	//Creates a deep copy of primary list into a new list
-	GameStorage* deepCopy();
+	/*GameStorage* deepCopy();*/
 	//overloads assignment operator for gamestorage
 	GameStorage& operator=(const GameStorage& rhs);
+
 	//overlaods extraction operator for GameStroage to output list into console.
 	friend std::ostream& operator<<(std::ostream& os, GameStorage& rhs);
+};

@@ -1,5 +1,5 @@
-#include "GameStorage.h"
-#include "Game.h"
+#include "GameStorage_HW2.h"
+#include "Game_HW2.h"
 
 
 //***************************************************************************************
@@ -40,14 +40,13 @@
 // Date: 10/3/2021
 // Description: Added Size as the Array length. 
 //*****************************************************
-GameStorage::GameStorage() {
+GameStorage::GameStorage()
+{
 
-	//should add new game to Game storage
-	SIZE = new int;
-	*SIZE = 10;
-	gameList = new Game[*SIZE];
-	//length = *SIZE; //dereferencing Size;
-	//nextIndex = 0;
+	
+	gameList = new Game[SIZE];
+	
+	
 	//std::cout << "Default Constructor called: GameStorage" << std::endl;
 }
 
@@ -64,10 +63,10 @@ GameStorage::GameStorage() {
 //*****************************************************
 GameStorage::GameStorage(int &newSize)
 {
-	*SIZE = newSize;
-	gameList = new Game[*SIZE];
+	SIZE = newSize;
+	gameList = new Game[SIZE];
 	
-	//nextIndex = 0;
+	
 }
 
 //*****************************************************
@@ -84,10 +83,9 @@ GameStorage::GameStorage(int &newSize)
 //*****************************************************
 GameStorage::GameStorage(const GameStorage& copy)
 {
-	SIZE = new int;
 	gameList = new Game;
 	*gameList = *copy.gameList;
-	*SIZE = *copy.SIZE;
+	SIZE = copy.SIZE;
 }
 
 
@@ -124,7 +122,7 @@ GameStorage::~GameStorage() {
 //******************************************
 void GameStorage::Set(int index, Game g)
 {
-	if (index < *SIZE) {
+	if (index < SIZE) {
 		gameList[index] = g;
 	}
 	else {
@@ -165,7 +163,7 @@ const Game& GameStorage::Get(int index)
 int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 {
 	int count = 0;
-	for (int i = 0; i < *SIZE; i++)
+	for (int i = 0; i < SIZE; i++)
 	{
 		if (gameList[i].getPrice() > lowerbound && gameList[i].getPrice() < upperbound)
 			count++;
@@ -191,9 +189,9 @@ Game& GameStorage::mostExpensive()
 {
 	double price = 0;
 	int num = 0;
-	int i = 0;
+	
 
-	for (i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 
 		if (gameList[i].getPrice() > price) {
 
@@ -220,7 +218,7 @@ Game& GameStorage::mostExpensive()
 //*****************************************************
 bool GameStorage::findByTitle(std::string name, Game& g)
 {
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 		if (name == g.getTitle()) {
 			return &g;
 		}
@@ -247,7 +245,7 @@ bool GameStorage::findByTitle(std::string name, Game& g)
 double GameStorage::priceTotal()
 {
 	double sum = 0.0;
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 		sum += gameList[i].getPrice();
 	}
 	return sum;
@@ -264,14 +262,11 @@ double GameStorage::priceTotal()
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added a pointer to Size as the Array length. 
+// 
 //*****************************************************
 int GameStorage::size()
 {
-	//(N[SIZE]/N[0]) +1 
-	int size = (sizeof(gameList[*SIZE]) / sizeof(gameList[0])) + 1;
-
-	return size;
+	return SIZE;
 }
 
 
@@ -285,11 +280,11 @@ int GameStorage::size()
 // ------------------------------------------
 // Name: Kyle Gerken
 // Date: 10/3/2021
-// Description: Added a pointer to Size as the Array length. 
+// Description: Added Size as the Array length. 
 //*****************************************************
 void GameStorage::initialize()
 {
-	for (int i = 0; i < *SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {
 
 		gameList[i].setTitle("NoTitle");
 		gameList[i].setEsrb("NoESRB");
@@ -316,37 +311,72 @@ std::string GameStorage::getAuthor()
 }
 
 
-void GameStorage::reSize(int newSize) 
+
+//*****************************************************
+//Function: reSize
+// 
+// Purpose: Changes the Size of the passed in Array. If new size if larger. 
+//			Array size passes in new info and leaves blank new spots.
+//			Arrays that are smaller, will only include game data of index values
+//			within th enew size paramters. Any info at the end of the list is deleted.
+//			
+// Update Information:
+// ------------------------------------------
+// 
+//*****************************************************
+//For code: "newArray = new Game[2 * newSize];" -- size_t is implemented to avoid byte overload error
+void GameStorage::reSize(size_t newSize) 
 {
-	Game *newArr;
+	//Create new Array temp pointer
+	Game* newArray = new Game[newSize];
 	
-	if (newSize >= *SIZE) 
+	if (newSize >= SIZE)
 	{
-		newArr = new Game[newSize];
-		for (int i = 0; i < *SIZE; i++) {
-			gameList[i] = newArr[i];
+		//Allocate more memory for Array, double size is best
+		newArray = new Game[newSize];
+		//Values must be retained in new array
+		//Should only iterate through SIZE. Values greater are non-existent
+		for (int i = 0; i < SIZE; i++) {
+			newArray[i] = gameList[i];
+			
 		}
-		*SIZE = newSize;
+
+		//Delete old array, to prevent memory leak
 		delete[] gameList;
-		gameList = newArr;
+		//New Array must be assigned to original name value.
+		gameList = newArray;
+
+		//reset value newArr
+		newArray = nullptr;
+		
+		//Update SIZE Variable to new Array size
+		SIZE = newSize;
 
 	}
-	else if (newSize <= *SIZE) 
-	{
-		newArr = new Game[newSize];
-		for (int j = 0; j < newSize; j++) 
+	else if (newSize <= SIZE)
+	{	//Smaller input of newSize than SIZE.
+		newArray = new Game[newSize];
+		for (int j = 0; j < newSize; j++)
 		{
-			gameList[j] = newArr[j];
+			gameList[j] = newArray[j];
+	
 		}
-		*SIZE = newSize;
+		
 		delete[] gameList;
-		gameList = newArr;
-	}
+
+		gameList = newArray;
+
+		newArray = nullptr;
+
+		SIZE = newSize;
+
+	};
+	
 }
 
-GameStorage* GameStorage::deepCopy() {
-
-}
+//GameStorage* GameStorage::deepCopy() {
+//
+//}
 
 GameStorage& GameStorage::operator=(const GameStorage& rhs)
 {
@@ -354,16 +384,22 @@ GameStorage& GameStorage::operator=(const GameStorage& rhs)
 		return *this;
 	}
 
-	*this->SIZE = *rhs.SIZE;
+	this->SIZE = rhs.SIZE;
 	*this->gameList = *rhs.gameList;
 
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, GameStorage& rhs) {
 	std::cout << "\n------------GameStorage List---------------\n";
-	std::cout << "Size of List: " << *rhs.SIZE << std::endl;
-	for (int i = 0; i < *rhs.SIZE; i++) {
+	std::cout << "Size of List: " << rhs.SIZE << std::endl;
+	for (int i = 0; i < rhs.SIZE; i++) {
 		std::cout << ". " << std::endl;
 	}
+
+	return os;
 }
+
+
+
 

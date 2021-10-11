@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameStorage.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game_HW2.cpp" />
+    <ClCompile Include="GameStorage_HW2.cpp" />
+    <ClCompile Include="main_HW2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameStorage.h" />
+    <ClInclude Include="Game_HW2.h" />
+    <ClInclude Include="GameStorage_HW2.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
