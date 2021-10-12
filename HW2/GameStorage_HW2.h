@@ -54,7 +54,7 @@ public:
 
 	//*************** Member Functions *********************************
 	//Sets index for game
-	void Set(int index, Game games);
+	void Set(int index, Game &games);
 
 	//Gets index of game
 	const Game& Get(int index);
@@ -89,5 +89,5 @@ public:
 	GameStorage& operator=(const GameStorage& rhs);
 
 	//overlaods extraction operator for GameStroage to output list into console.
-	friend std::ostream& operator<<(std::ostream& os,const GameStorage& rhs);
+	friend std::ostream& operator<<(std::ostream& os, GameStorage &rhs);
 };

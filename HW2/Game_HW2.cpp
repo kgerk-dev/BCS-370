@@ -260,7 +260,6 @@ Game& Game::operator=(const Game& rhs)
 //*****************************************************
 std::ostream& operator<<(std::ostream& os, const Game& g)
 {
-	os << "\n-----------------------------" << std::endl;
 	os << "Title: " << *g.m_title << std::endl;
 	os << "ESRB: " << *g.m_esrb << std::endl;
 	os << std::fixed << std::setprecision(2) << "Price: $ " << *g.m_price << std::endl;

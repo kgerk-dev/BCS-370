@@ -78,6 +78,11 @@ GameStorage::GameStorage(int newSize)
 // Date: 10/5/2021
 // Description: Changed object variables to pointers. Created new allocations of SIZE and gameList. 
 //				Performed a deep copy by dereferencing gameList & SIZE into the object seeking a copy.
+// 
+// Name: Kyle Gerken
+// Date: 10/12/2021
+// Description: Changed the previous Update to include a for loop that copies the data from the 
+//				original array to the copy array
 //*****************************************************
 GameStorage::GameStorage(const GameStorage& copy)
 {
@@ -123,7 +128,7 @@ GameStorage::~GameStorage() {
 // Date: 10/3/2021
 // Description: Added Size as the Array length. 
 //******************************************
-void GameStorage::Set(int index, Game g)
+void GameStorage::Set(int index, Game &g)
 {
 	if (index < size) {
 		gameList[index] = g;
@@ -162,13 +167,17 @@ const Game& GameStorage::Get(int index)
 // Name: Kyle Gerken
 // Date: 10/3/2021
 // Description: Added Size as the Array length. 
+// 
+// Name: Kyle Gerken
+// Date: 10/12/2021
+// Description: Changed '>' and '<' on to '>=' and '<='
 //*****************************************************
 int GameStorage::GamePriceCount(double lowerbound, double upperbound)
 {
 	int count = 0;
 	for (int i = 0; i < size; i++)
 	{
-		if (gameList[i].GetPrice() > lowerbound && gameList[i].GetPrice() < upperbound)
+		if (gameList[i].GetPrice() >= lowerbound && gameList[i].GetPrice() <= upperbound)
 			count++;
 	}
 
@@ -301,7 +310,7 @@ void GameStorage::Initialize()
 //*****************************************************
 //Function: getAuthor
 // 
-// Purpose: Returns teh author of the collection of Games. In this scenario it Harcoded to myself
+// Purpose: Returns the author of the collection of Games. In this scenario it Harcoded to myself
 // 
 // Update Information:
 // ------------------------------------------
@@ -327,27 +336,27 @@ std::string GameStorage::GetAuthor()
 // ------------------------------------------
 // 
 //*****************************************************
-//For code: "newArray = new Game[2 * newSize];" -- size_t is implemented to avoid byte overload error
+
 void GameStorage::ReSize(int newSize) 
 {
 	//Create new Array temp pointer
-	Game* newArray = new Game[newSize];
+	GameStorage* newArray = nullptr;
 	
 	if (newSize >= size)
 	{
-		//Allocate more memory for Array, double size is best
-		newArray = new Game[newSize];
+		
+		newArray = new GameStorage[newSize];
 		//Values must be retained in new array
 		//Should only iterate through SIZE. Values greater are non-existent
-		for (int i = 0; i < size; i++) {
-			newArray[i] = gameList[i];
+		for (int i = 0; i < newSize ; i++) {
+			newArray[i] = this[i];
 			
 		}
 
 		//Delete old array, to prevent memory leak
-		delete[] gameList;
+		delete[] this;
 		//New Array must be assigned to original name value.
-		gameList = newArray;
+		*this = *newArray;
 
 		//reset value newArr
 		newArray = nullptr;
@@ -358,16 +367,17 @@ void GameStorage::ReSize(int newSize)
 	}
 	else if (newSize <= size)
 	{	//Smaller input of newSize than SIZE.
-		newArray = new Game[newSize];
+		newArray = new GameStorage[newSize];
+
 		for (int j = 0; j < newSize; j++)
 		{
-			gameList[j] = newArray[j];
+			this[j] = newArray[j];
 	
 		}
 		
-		delete[] gameList;
+		delete[] this;
 
-		gameList = newArray;
+		*this = *newArray;
 
 		newArray = nullptr;
 
@@ -377,6 +387,17 @@ void GameStorage::ReSize(int newSize)
 	
 }
 
+
+
+//*****************************************************
+//Function: DeepCopy
+// 
+// Purpose: Returns pointer of copied opbjects in GameStorage
+//			
+// Update Information:
+// ------------------------------------------
+// 
+//*****************************************************
 GameStorage* GameStorage::DeepCopy() {
 	GameStorage* temp;
 
@@ -385,6 +406,17 @@ GameStorage* GameStorage::DeepCopy() {
 	return temp;
 }
 
+
+
+//*****************************************************
+//Function: operator=
+// 
+// Purpose: overloads assignments operator to assign two instances of gamestorage
+//			
+// Update Information:
+// ------------------------------------------
+// 
+//*****************************************************
 GameStorage& GameStorage::operator=(const GameStorage& rhs)
 {
 	//Gathered from textbook pg.180 - Pointers and Array-Based Lists
@@ -406,12 +438,34 @@ GameStorage& GameStorage::operator=(const GameStorage& rhs)
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, const GameStorage &rhs) {
+
+
+//*****************************************************
+//Function: operator<<
+// 
+// Purpose: overloads extraction operator to output instance of GameStorage
+//			
+// Update Information:
+// ------------------------------------------
+// 
+//*****************************************************
+std::ostream& operator<<(std::ostream& os, GameStorage &rhs) {
 	
 	os << "\n------------GameStorage List---------------\n";
+	os << "Size of GameStorage: " << rhs.Size() << std::endl;
 	for (int i = 0; i < rhs.size; i++) {
-		os << rhs.gameList[i] << std::endl;
+		if (rhs.gameList[i].GetTitle() != "NoTitle")
+		{
+			os << "Game " << i + 1 << ":" << std::endl;
+			os << rhs.gameList[i] << std::endl;
+		}
 	}
+
+	os << "Games between $20 and $30: " << rhs.GamePriceCount(20, 30) << std::endl;
+	os << "Most Expensive Game in the Entire List: " << rhs.MostExpensive() << std::endl;
+	os << "Total Price of all games in Entire List: $" << rhs.PriceTotal() << std::endl;
+	os << rhs.GetAuthor() << std::endl;
+
 
 	return os;
 }
