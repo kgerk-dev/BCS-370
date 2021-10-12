@@ -25,12 +25,14 @@
 //
 //***************************************************************************************
 
+
 class GameStorage
 {
 private:
 
 	Game* gameList; //points to array
-	//static Game games[SIZE];
+	
+	int size = 10;
 	
 	
 	//used as iterator
@@ -40,11 +42,11 @@ private:
 
 
 public:
-	static int SIZE;
+	
 	//**************** Constructors/Destructors ***************************
 	GameStorage();
 
-	GameStorage(int&);
+	GameStorage(int);
 
 	GameStorage(const GameStorage& copy);
 
@@ -58,34 +60,34 @@ public:
 	const Game& Get(int index);
 
 	//Returns num of games between price range
-	int gamePriceCount(double lowerbound, double upperbound);
+	int GamePriceCount(double lowerbound, double upperbound);
 
 	//Returns most expensive game, by price
-	Game& mostExpensive();
+	Game& MostExpensive();
 
 	//T/F if game title is correct
-	bool findByTitle(std::string name, Game& g);
+	bool FindByTitle(std::string name, Game& g);
 
 	//Returns sum of all games by price
-	double priceTotal();
+	double PriceTotal();
 
 	//Returns size of storage collection
-	int size();
+	int Size() const ;
 
 	//Rests games info to default values
-	void initialize();
+	void Initialize();
 
 	//Returns Author of Game Collection
-	std::string getAuthor();
+	std::string GetAuthor();
 
 	//resizes the array used, can be smaller or larger
-	void reSize(size_t);
+	void ReSize(int);
 
 	//Creates a deep copy of primary list into a new list
-	/*GameStorage* deepCopy();*/
+	GameStorage* DeepCopy();
 	//overloads assignment operator for gamestorage
 	GameStorage& operator=(const GameStorage& rhs);
 
 	//overlaods extraction operator for GameStroage to output list into console.
-	friend std::ostream& operator<<(std::ostream& os, GameStorage& rhs);
+	friend std::ostream& operator<<(std::ostream& os,const GameStorage& rhs);
 };

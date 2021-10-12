@@ -3,7 +3,7 @@
 
 
 //***************************************************************************************
-// File: Game.cpp
+// File: GameStorage_HW2.cpp
 //
 // Purpose: 
 //
@@ -43,9 +43,7 @@
 GameStorage::GameStorage()
 {
 
-	
-	gameList = new Game[SIZE];
-	
+	gameList = new Game[size];
 	
 	//std::cout << "Default Constructor called: GameStorage" << std::endl;
 }
@@ -61,10 +59,10 @@ GameStorage::GameStorage()
 // ------------------------------------------
 // 
 //*****************************************************
-GameStorage::GameStorage(int &newSize)
+GameStorage::GameStorage(int newSize)
 {
-	SIZE = newSize;
-	gameList = new Game[SIZE];
+	
+	gameList = new Game[newSize];
 	
 	
 }
@@ -83,9 +81,14 @@ GameStorage::GameStorage(int &newSize)
 //*****************************************************
 GameStorage::GameStorage(const GameStorage& copy)
 {
-	gameList = new Game;
-	*gameList = *copy.gameList;
-	SIZE = copy.SIZE;
+	size = copy.size;
+	gameList = new Game[size];
+
+	for (int i = 0; i < size; i++)
+	{
+		gameList[i] = copy.gameList[i];
+	}
+	
 }
 
 
@@ -122,7 +125,7 @@ GameStorage::~GameStorage() {
 //******************************************
 void GameStorage::Set(int index, Game g)
 {
-	if (index < SIZE) {
+	if (index < size) {
 		gameList[index] = g;
 	}
 	else {
@@ -160,12 +163,12 @@ const Game& GameStorage::Get(int index)
 // Date: 10/3/2021
 // Description: Added Size as the Array length. 
 //*****************************************************
-int GameStorage::gamePriceCount(double lowerbound, double upperbound)
+int GameStorage::GamePriceCount(double lowerbound, double upperbound)
 {
 	int count = 0;
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < size; i++)
 	{
-		if (gameList[i].getPrice() > lowerbound && gameList[i].getPrice() < upperbound)
+		if (gameList[i].GetPrice() > lowerbound && gameList[i].GetPrice() < upperbound)
 			count++;
 	}
 
@@ -185,17 +188,17 @@ int GameStorage::gamePriceCount(double lowerbound, double upperbound)
 // Date: 10/3/2021
 // Description: Added a pointer to Size as the Array length. 
 //*****************************************************
-Game& GameStorage::mostExpensive()
+Game& GameStorage::MostExpensive()
 {
 	double price = 0;
 	int num = 0;
 	
 
-	for (int i = 0; i < SIZE; i++) {
+	for (int i = 0; i < size; i++) {
 
-		if (gameList[i].getPrice() > price) {
+		if (gameList[i].GetPrice() > price) {
 
-			price = gameList[i].getPrice();
+			price = gameList[i].GetPrice();
 			num = i;
 		}
 	}
@@ -216,10 +219,10 @@ Game& GameStorage::mostExpensive()
 // Date: 10/3/2021
 // Description: Added a pointer to Size as the Array length. 
 //*****************************************************
-bool GameStorage::findByTitle(std::string name, Game& g)
+bool GameStorage::FindByTitle(std::string name, Game& g)
 {
-	for (int i = 0; i < SIZE; i++) {
-		if (name == g.getTitle()) {
+	for (int i = 0; i < size; i++) {
+		if (name == g.GetTitle()) {
 			return &g;
 		}
 		else {
@@ -242,11 +245,11 @@ bool GameStorage::findByTitle(std::string name, Game& g)
 // Date: 10/3/2021
 // Description: Added a pointer to Size as the Array length. 
 //*****************************************************
-double GameStorage::priceTotal()
+double GameStorage::PriceTotal()
 {
 	double sum = 0.0;
-	for (int i = 0; i < SIZE; i++) {
-		sum += gameList[i].getPrice();
+	for (int i = 0; i < size; i++) {
+		sum += gameList[i].GetPrice();
 	}
 	return sum;
 }
@@ -264,9 +267,9 @@ double GameStorage::priceTotal()
 // Date: 10/3/2021
 // 
 //*****************************************************
-int GameStorage::size()
+int GameStorage::Size() const 
 {
-	return SIZE;
+	return size;
 }
 
 
@@ -282,13 +285,13 @@ int GameStorage::size()
 // Date: 10/3/2021
 // Description: Added Size as the Array length. 
 //*****************************************************
-void GameStorage::initialize()
+void GameStorage::Initialize()
 {
-	for (int i = 0; i < SIZE; i++) {
+	for (int i = 0; i < size; i++) {
 
-		gameList[i].setTitle("NoTitle");
-		gameList[i].setEsrb("NoESRB");
-		gameList[i].setPrice(0.0);
+		gameList[i].SetTitle("NoTitle");
+		gameList[i].SetEsrb("NoESRB");
+		gameList[i].SetPrice(0.0);
 	}
 	std::cout << "Game list values reset to default" << std::endl;
 }
@@ -304,7 +307,7 @@ void GameStorage::initialize()
 // ------------------------------------------
 // 
 //*****************************************************
-std::string GameStorage::getAuthor()
+std::string GameStorage::GetAuthor()
 {
 	std::string author = "Author: Kyle Gerken\n";
 	return author;
@@ -325,18 +328,18 @@ std::string GameStorage::getAuthor()
 // 
 //*****************************************************
 //For code: "newArray = new Game[2 * newSize];" -- size_t is implemented to avoid byte overload error
-void GameStorage::reSize(size_t newSize) 
+void GameStorage::ReSize(int newSize) 
 {
 	//Create new Array temp pointer
 	Game* newArray = new Game[newSize];
 	
-	if (newSize >= SIZE)
+	if (newSize >= size)
 	{
 		//Allocate more memory for Array, double size is best
 		newArray = new Game[newSize];
 		//Values must be retained in new array
 		//Should only iterate through SIZE. Values greater are non-existent
-		for (int i = 0; i < SIZE; i++) {
+		for (int i = 0; i < size; i++) {
 			newArray[i] = gameList[i];
 			
 		}
@@ -350,10 +353,10 @@ void GameStorage::reSize(size_t newSize)
 		newArray = nullptr;
 		
 		//Update SIZE Variable to new Array size
-		SIZE = newSize;
+		size = newSize;
 
 	}
-	else if (newSize <= SIZE)
+	else if (newSize <= size)
 	{	//Smaller input of newSize than SIZE.
 		newArray = new Game[newSize];
 		for (int j = 0; j < newSize; j++)
@@ -368,33 +371,46 @@ void GameStorage::reSize(size_t newSize)
 
 		newArray = nullptr;
 
-		SIZE = newSize;
+		size = newSize;
 
 	};
 	
 }
 
-//GameStorage* GameStorage::deepCopy() {
-//
-//}
+GameStorage* GameStorage::DeepCopy() {
+	GameStorage* temp;
+
+	temp = this;
+
+	return temp;
+}
 
 GameStorage& GameStorage::operator=(const GameStorage& rhs)
 {
-	if (this == &rhs) {
-		return *this;
-	}
+	//Gathered from textbook pg.180 - Pointers and Array-Based Lists
+	if (this != &rhs)
+	{	//delete old instance of gamelist, 
+		delete[] gameList;
+		//assign values of rhs to member values
+		size = rhs.size;
+		//Create the array
+		gameList = new Game[size];
 
-	this->SIZE = rhs.SIZE;
-	*this->gameList = *rhs.gameList;
+		//apply new data to orignial list name
+		for (int i = 0; i < size; i++)
+		{
+			gameList[i] = rhs.gameList[i];
+		}
+	}
 
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, GameStorage& rhs) {
-	std::cout << "\n------------GameStorage List---------------\n";
-	std::cout << "Size of List: " << rhs.SIZE << std::endl;
-	for (int i = 0; i < rhs.SIZE; i++) {
-		std::cout << ". " << std::endl;
+std::ostream& operator<<(std::ostream& os, const GameStorage &rhs) {
+	
+	os << "\n------------GameStorage List---------------\n";
+	for (int i = 0; i < rhs.size; i++) {
+		os << rhs.gameList[i] << std::endl;
 	}
 
 	return os;

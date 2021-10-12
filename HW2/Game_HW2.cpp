@@ -130,7 +130,7 @@ Game::~Game() {
 // Date: 10/3/2021
 // Description: Changed member to a pointer
 //*****************************************************
-void Game::setTitle(std::string title) {
+void Game::SetTitle(std::string title) {
 	*m_title = title;
 }
 
@@ -146,7 +146,7 @@ void Game::setTitle(std::string title) {
 // Date: 10/3/2021
 // Description: Changed varaible to a pointer
 //*****************************************************
-void Game::setEsrb(std::string esrb)
+void Game::SetEsrb(std::string esrb)
 {
 	*m_esrb = esrb;
 }
@@ -162,7 +162,7 @@ void Game::setEsrb(std::string esrb)
 // Date: 10/3/2021
 // Description: Changed varaible to a pointer
 //*****************************************************
-void Game::setPrice(double price) {
+void Game::SetPrice(double price) {
 	*m_price = price;
 }
 
@@ -179,7 +179,7 @@ void Game::setPrice(double price) {
 // Date: 10/3/2021
 // Description: Changed return variable to a pointer
 //*****************************************************
-std::string Game::getTitle()
+std::string Game::GetTitle()
 {
 	return *m_title;
 }
@@ -196,7 +196,7 @@ std::string Game::getTitle()
 // Date: 10/3/2021
 // Description: Changed return variable to a pointer
 //*****************************************************
-std::string Game::getEsrb()
+std::string Game::GetEsrb()
 {
 	return *m_esrb;
 }
@@ -213,7 +213,7 @@ std::string Game::getEsrb()
 // Date: 10/3/2021
 // Description: Changed return variable to a pointer
 //*****************************************************
-double Game::getPrice()
+double Game::GetPrice()
 {
 	return *m_price;
 }
@@ -262,8 +262,8 @@ std::ostream& operator<<(std::ostream& os, const Game& g)
 {
 	os << "\n-----------------------------" << std::endl;
 	os << "Title: " << *g.m_title << std::endl;
-	os << "ESRB: " << g.m_esrb << std::endl;
-	os << std::fixed << std::setprecision(2) << "Price: $ " << g.m_price << std::endl;
+	os << "ESRB: " << *g.m_esrb << std::endl;
+	os << std::fixed << std::setprecision(2) << "Price: $ " << *g.m_price << std::endl;
 
 	return os;
 }
@@ -281,7 +281,7 @@ std::ostream& operator<<(std::ostream& os, const Game& g)
 //*****************************************************
 std::istream& operator>>(std::istream& is, const Game& rhs)
 {
-	is >> *rhs.m_title >> *rhs.m_esrb >> *rhs.m_esrb;
+	is >> *rhs.m_title >> *rhs.m_esrb >> *rhs.m_price;
 
 	return is;
 }

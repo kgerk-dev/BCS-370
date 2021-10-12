@@ -47,18 +47,18 @@ public:
 	~Game();
 
 	/**************** Setters *********************/
-	void setTitle(std::string title);
+	void SetTitle(std::string title);
 
-	void setEsrb(std::string esrb);
+	void SetEsrb(std::string esrb);
 
-	void setPrice(double d);
+	void SetPrice(double d);
 
 	/*************** Getters ***********************/
-	std::string getTitle();
+	std::string GetTitle();
 
-	std::string getEsrb();
+	std::string GetEsrb();
 
-	double getPrice();
+	double GetPrice();
 
 	/********* Assignment overloads ************/
 	//Member overload
