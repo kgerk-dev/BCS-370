@@ -49,7 +49,7 @@ int main() {
 		<< "Game 2:\t" << game2 << "\nGame 3: \t" << game3 << std::endl;
 
 	std::cout << "operator>> Test. Enter a Game when prompted." << std::endl;
-	Game game4;
+
 	std::cout << "Enter in order: Title, Esrb, and price, EX: \"Title\", \"ESRB\", 00.00" << std::endl;
 	std::cin >> game4;
 	std::cout << "Your Game input: \n" << game4.GetTitle() << "\t"
