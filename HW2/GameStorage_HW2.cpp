@@ -375,9 +375,11 @@ void GameStorage::ReSize(int newSize)
 	
 		}
 		
-		delete[] this;
+		//delete[] this;
+		delete[] gameList;
 
-		*this = *newArray;
+		//*this = *newArray;
+		gameList = newArray;
 
 		newArray = nullptr;
 
@@ -400,8 +402,11 @@ void GameStorage::ReSize(int newSize)
 //*****************************************************
 GameStorage* GameStorage::DeepCopy() {
 	GameStorage* temp;
+	temp = new GameStorage;
 
-	temp = this;
+	for (int i = 0; i < size; i++) {
+		temp[i] = this[i];
+	}
 
 	return temp;
 }

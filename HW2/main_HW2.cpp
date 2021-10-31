@@ -94,12 +94,9 @@ int main() {
 	newStorage = gs;
 	
 	//*****Memory Leak on Resize
-	//newStorage->ReSize(20);
+	newStorage->ReSize(20);
 	//Resize newStorage to only show 3 games of the originial List
 	std::cout << *newStorage << std::endl;
-	
-
-	
 
 	delete[] gs;
 	//delete[] newStorage;
