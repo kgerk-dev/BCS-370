@@ -12,7 +12,8 @@
 // Update Information:
 // -----------------------------
 // Name: Kyle Gerken
-// Date: 9/18/2021
+// Date: 10/29/2021 -- Original version used form HW1 / HW2.
+// 
 // Description: 	
 //		- Created Private member variables: Title, ESRB, and Price
 //		- Created appropriate Set/Get methods
@@ -21,7 +22,8 @@
 // Name: Kyle Gerken
 // Date: 10/30/2021
 // Description:
-//		- Changed Game class into an Unsorted Linked list class for HW3. Updated From HW1,HW2.
+//		- Changed Game class into an Unsorted Linked list class for HW3. Updated From
+//		  HW1,HW2.
 //
 //***************************************************************************************
 
@@ -32,10 +34,9 @@
 // 
 // Update Information:
 // ------------------------------------------
-// 
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: All member variables were changed to pointers. Instantiated new data types.
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 // 
 //*****************************************************
 Game::Game() {
@@ -59,7 +60,7 @@ Game::Game() {
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
+// Date: 10/29/2021
 // Description:	Paramterized Constructor modified for dynamic allocation of member variables set to pointers.
 //*****************************************************
 Game::Game(std::string title, std::string esrb, double price)
@@ -84,8 +85,8 @@ Game::Game(std::string title, std::string esrb, double price)
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Added for HW2, member variables were set as pointers. 
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 Game::Game(const Game& copy)
 {	//Deep copy of member variables
@@ -109,8 +110,8 @@ Game::Game(const Game& copy)
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Destructor deallocates member variables and releases pointer ot memory
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 Game::~Game() {
 	delete m_title;
@@ -130,9 +131,9 @@ Game::~Game() {
 // 
 // Update Information:
 // ------------------------------------------
-// Name: Kyle Gerken	
-// Date: 10/3/2021
-// Description: Changed member to a pointer
+// Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 void Game::SetTitle(std::string title) {
 	*m_title = title;
@@ -147,8 +148,8 @@ void Game::SetTitle(std::string title) {
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed varaible to a pointer
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 void Game::SetEsrb(std::string esrb)
 {
@@ -163,8 +164,8 @@ void Game::SetEsrb(std::string esrb)
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed varaible to a pointer
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 void Game::SetPrice(double price) {
 	*m_price = price;
@@ -179,9 +180,9 @@ void Game::SetPrice(double price) {
 // 
 // Update Information:
 // ------------------------------------------
-// Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed return variable to a pointer
+//Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 std::string Game::GetTitle()
 {
@@ -196,9 +197,9 @@ std::string Game::GetTitle()
 // 
 // Update Information:
 // ------------------------------------------
-// Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed return variable to a pointer
+//Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 std::string Game::GetEsrb()
 {
@@ -214,8 +215,8 @@ std::string Game::GetEsrb()
 // Update Information:
 // ------------------------------------------
 // Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed return variable to a pointer
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 double Game::GetPrice()
 {
@@ -226,16 +227,14 @@ double Game::GetPrice()
 //*****************************************************
 // Function: Assignment Operator Member Overlaod
 // 
-// Purpose: Overloads operator= to assign one game object passed by reference to other game object
+// Purpose: Overloads operator= to assign one game object passed by reference to other
+//			game object
 // 
 // Update Information:
 // ------------------------------------------
-// / Name: Kyle Gerken
-// Date: 10/3/2021
-// Description: Changed member variable and referenced variables of object (rhs) to	pointers.
-//				Added an if statement to check if the referenced object was already equal to object 
-//				to be copied. Updated function using this to implicitly use the object reference.
-//				
+// Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 Game& Game::operator=(const Game& rhs)
 {
@@ -260,7 +259,9 @@ Game& Game::operator=(const Game& rhs)
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 std::ostream& operator<<(std::ostream& os, const Game& g)
 {
@@ -280,7 +281,9 @@ std::ostream& operator<<(std::ostream& os, const Game& g)
 // 
 // Update Information:
 // ------------------------------------------
-// 
+// Name: Kyle Gerken
+// Date: 10 / 29 / 2021 
+// Description: Original version used form HW1 / HW2.
 //*****************************************************
 std::istream& operator>>(std::istream& is, const Game& rhs)
 {

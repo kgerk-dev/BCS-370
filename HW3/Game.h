@@ -1,23 +1,25 @@
 #pragma once
 //***************************************************************************************
-// File: Game.cpp
+// File: Game.h
 //
 // Purpose: Declarations class member functions
 //
 // Written By: Kyle Gerken
 //
-// COmpiler: Visual C++ 2019
+// Compiler: Visual C++ 2019
 //
 // Update Information:
 // -----------------------------
 // Name: Kyle Gerken
-// Date: 9/18/2021
+// Date: 10/29/2021 -- Original version used form HW1 / HW2.
+// 
 // Description:		- Created Private member variables: Title, ESRB, and Price
 //					- Created appropriate Set/Get methods
 //					- Overloaded "operator=" and "operator<<"  for appropriate object usage
 // 
 // Name: Kyle Gerken
-// Date: 10/3/2021
+// Date: 10/29/2021
+//					- For HW3, no changes have been done to Game.h/.cpp as of yet.
 //
 //***************************************************************************************
 
