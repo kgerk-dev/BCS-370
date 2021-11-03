@@ -1,0 +1,12 @@
+Humankind
+Everyone10+
+50
+Pac-man
+Everyone
+20
+MarioKart
+Everyone
+40
+Halo
+Mature
+70

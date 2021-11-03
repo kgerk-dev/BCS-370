@@ -31,11 +31,10 @@
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-GameList<T>::GameList() {
-	//m_head = nullptr;
-	//m_current = nullptr;
-	m_iter = 0;
+GameList::GameList() {
+	m_head = nullptr;
+	m_tail = nullptr;
+	m_length = 0;
 }
 
 
@@ -48,50 +47,55 @@ GameList<T>::GameList() {
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-GameList<T>::GameList(const GameList<T>& otherList) 
+
+GameList::GameList(const GameList& otherList) 
 {
+	GameListNode* temp = otherList.m_head;
+	GameListNode* current = m_head;
 
-	GameListNode<T>* newNode = nullptr;
-	GameListNode<T>* currentNode = nullptr;
+	m_length = otherList.m_length;
 
-	if (m_head != nullptr) 
+	//Clear the list if the nodes are full.
+	if (m_head != nullptr)
 	{
-		Delete();
+		Clear();
 	}
-
-	if (otherList.m_head == nullptr) 
+	//Check if otherList is empty. Set private members to null if otherList is empty.
+	if (m_head == nullptr)
 	{
 		m_head = nullptr;
-		m_current = nullptr;
-		m_length = 0;
+		m_tail = nullptr;
 	}
-	else 
+	else
 	{
-		currentNode = otherList.m_head;
+		// Set current pointer to list that should be copied.
+		current = otherList.m_head;
 
-		m_length = otherList.m_iter;
+		m_length = otherList.m_length;
 
-		m_head = new GameListNode<T>;
-		m_head->data = currentNode->data;
-		m_head->next = nullptr;
-		m_current = m_head;
-		currentNode = currentNode->next;
+		// Now Copy the Nodes from referenced list to current list.
+		m_head = new GameListNode;
+		m_head->data = current->data;
+		m_head->next = nullptr; //link pointer (next) must be set to null (last position).
+		m_tail = m_head; 
 
-		while (currentNode != nullptr) 
+		//iterate to next node
+		m_head = m_head->next;
+
+		//last position set. Copy remaining nodes into list.
+		while (current != nullptr) 
 		{
-			newNode = new GameListNode<T>;
-			newNode->data = currentNode->data;
-			newNode->next = nullptr;
-			m_current->next = newNode;
-			m_current = newNode;
+			temp = new GameListNode;
+			temp->data = current->data;
+			temp->next = nullptr;
 
-			currentNode = currentNode->next;
-			
-		} // end while
+			m_tail->next = temp;
+			m_tail = temp;
 
-	}//end else
-}//end Constructor
+			current = current->next;
+		}
+	}
+}//end Copy Constructor
 
 
 
@@ -109,8 +113,7 @@ GameList<T>::GameList(const GameList<T>& otherList)
 //			- Refer to Clear for explicit implementation of the function
 //			- line: 
 //*****************************************************
-template <class T>
-GameList<T>::~GameList() 
+GameList::~GameList() 
 {
 	Clear();
 }
@@ -126,10 +129,55 @@ GameList<T>::~GameList()
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-GameList<T> GameList<T>::operator=(GameList<T>& rhs)
+GameList GameList::operator=(GameList& rhs)
 {
+	if (this != &rhs)
+	{
+		GameListNode* temp;
+		GameListNode* current;
 
+		if (m_head == nullptr)
+		{
+			Clear();
+		}
+		if (rhs.m_head == nullptr)
+		{
+			m_head = nullptr;
+			m_tail = nullptr;
+			m_length = 0;
+		}
+		else
+		{
+			// Set current pointer to list that should be copied.
+			current = rhs.m_head;
+
+			m_length = rhs.m_length;
+
+			// Now Copy the Nodes from referenced list to current list.
+			m_head = new GameListNode;
+			m_head->data = current->data;
+			m_head->next = nullptr; //link pointer (next) must be set to null (last position).
+			m_tail = m_head;
+
+			//iterate to next node
+			m_head = m_head->next;
+
+			//last position set. Copy remaining nodes into list.
+			while (current != nullptr)
+			{
+				temp = new GameListNode;
+				temp->data = current->data;
+				temp->next = nullptr;
+
+				m_tail->next = temp;
+				m_tail = temp;
+
+				current = current->next;
+			}
+		}
+	}
+
+	return *this;
 }
 //*****************************************************
 // Function: GameList.Clear() Function Definition
@@ -140,19 +188,18 @@ GameList<T> GameList<T>::operator=(GameList<T>& rhs)
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-void GameList<T>::Clear() 
+void GameList::Clear() 
 {
-	GameListNode<T>* tempNode;
+	GameListNode* temp;
 
 	while (m_head != nullptr) 
 	{
-		tempNode = m_head;
-		m_head = m_head->data;
-		delete tempNode;
+		temp = m_head;
+		m_head = m_head->next;
+		delete temp;
 	}
 
-	m_current = nullptr;
+	m_tail = nullptr;
 
 	m_length = 0;
 }
@@ -169,8 +216,7 @@ void GameList<T>::Clear()
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-int GameList<T>::Length() const 
+int GameList::Length() const 
 {
 	return m_length;
 }
@@ -185,11 +231,10 @@ int GameList<T>::Length() const
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-void GameList<T>::Add(const Game e) {
+void GameList::Add(const Game e) {
 
 	//Create new NodeType item (dynamically allocate)
-	GameListNode<T>* temp = new GameListNode<T>;
+	GameListNode* temp = new GameListNode;
 
 	//Set fields on temp item. data = e, next = head to place in first position.
 	temp->data = e;
@@ -222,9 +267,41 @@ void GameList<T>::Add(const Game e) {
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-void GameList<T>::Add(const GameList<T>& otherList)
+
+void GameList::Add(const GameList& otherList)
 {
+	GameListNode* temp, * newNode;
+
+	newNode = new GameListNode;
+
+	newNode->data = m_head->data; //reads data in head
+	newNode->next = m_head; //points to next node after head
+
+	if (m_head == nullptr)
+	{
+		//empty original list
+		m_head = newNode;
+	}
+	else
+	{
+		temp = m_head;
+		while (temp->next != nullptr)
+		{
+			temp = temp->next;
+		}
+		//add new nodes to end of list
+		GameListNode* otherNode;
+		otherNode = otherList.m_head;
+
+		while (otherNode != nullptr)
+		{
+			temp->data = otherNode->data;
+			temp = temp->next;
+			otherNode = otherNode->next;
+		}
+
+		temp->next = newNode;
+	}
 
 }
 
@@ -240,10 +317,28 @@ void GameList<T>::Add(const GameList<T>& otherList)
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-bool GameList<T>::FindGame(std::string title, Game & result) const
+bool GameList::FindGame(std::string title, Game & result) const
 {
+	GameListNode* temp;
+	bool found = false; // identify if result in search is True
 
+	// temp node should point to first node in list.
+	temp = m_head;
+
+	while (temp != nullptr && !found)
+	{
+		if (temp->data.GetTitle() == title)
+		{
+			found = true;
+		}
+		else
+		{
+			// set temp to iterate to next node.
+			temp = temp->next;
+		}
+	}
+
+	return found;
 }
 
 
@@ -257,9 +352,36 @@ bool GameList<T>::FindGame(std::string title, Game & result) const
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-void GameList<T>::Delete(std::string title)
+void GameList::Delete(std::string title)
 {
+	GameListNode* location = m_head, * tempLocation = nullptr;
+	// 1. Find the target item to delete (title)
+	
+
+	//		a. The start item is the target item.
+	if (title == location->data.GetTitle())
+	{	
+		m_head = m_head->next;
+		delete location;
+		m_length--;
+	}
+	else
+	{
+		//		b. The target item is elsewhere in the list
+		while ((location->next != nullptr) && (title != (location->next)->data.GetTitle()))
+		{
+			location = location->next;
+		}
+
+		if (location->next == nullptr) { return; } //No Target
+
+		// 2. Updating the pointers in the list so that the target item is removed
+		tempLocation = location->next = (location->next)->next;
+		// 3. Deallocate the target item so memory for that item is given back to the system.
+		delete tempLocation;
+		// 4. Decrement the length
+		m_length--;
+	}
 
 }
 
@@ -274,16 +396,28 @@ void GameList<T>::Delete(std::string title)
 // Update Information:
 // ------------------------------------------
 //*****************************************************
-template <class T>
-std::ostream& operator<<(std::ostream os, GameList<T>& rhs)
-{
 
+std::ostream& operator<<(std::ostream& os, GameList& rhs)
+{
+	GameListNode* location = rhs.m_head;
+	while (location != nullptr)
+	{
+		os << location->data << std::endl;
+		rhs.m_head = rhs.m_head->next;
+	}
+	return os;
+}
+
+
+std::istream& operator>>(std::istream& is, GameList& rhs)
+{
+	
+
+	return is;
 }
 
 
 
-template <class T>
-std::istream& operator>>(std::istream is, GameList<T>& rhs)
-{
 
-}
+
+

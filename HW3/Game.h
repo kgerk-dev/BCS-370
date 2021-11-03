@@ -22,12 +22,9 @@
 //					- For HW3, no changes have been done to Game.h/.cpp as of yet.
 //
 //***************************************************************************************
-
-
 #include <iostream>
 #include <string>
 #include <iomanip>
-
 
 
 class Game

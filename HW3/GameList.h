@@ -41,10 +41,10 @@
 // Description: All member variables were changed to pointers. Instantiated new data types.
 // 
 //*****************************************************
-template <class T>
+
 struct GameListNode {
-	T data;
-	GameListNode<T> *next;
+	Game data;
+	GameListNode *next;
 };
 
 
@@ -64,7 +64,7 @@ struct GameListNode {
 //		  3. Assignment Operator Overload operator=.
 // 
 //*****************************************************
-template <class T>
+
 class GameList
 {
 public:
@@ -75,28 +75,28 @@ public:
 	//******************* Rule of Three *************************
 	GameList(const GameList& otherList);
 	~GameList();
-	GameList<T> operator=(GameList& rhs);
+	GameList operator=(GameList& rhs);
 
 	//****************** Member Functions ***********************
 
 	void Clear();
 	int Length() const; //O(1)
 	void Add(const Game e);
-	void Add(const GameList<T>& otherList);
+	void Add(const GameList& otherList);
 	bool FindGame(std::string title, Game& result) const;
 	void Delete(std::string title);
 
 
 	//******************** Non-Member Overloads *****************
 
-	friend std::ostream& operator<<(std::ostream& os, GameList<T>& rhs);
+	friend std::ostream& operator<<(std::ostream& os, GameList& rhs);
 
-	friend std::istream& operator>>(std::istream& is, GameList<T>& rhs);
+	friend std::istream& operator>>(std::istream& is, GameList& rhs);
 
 	//****************** Private Members ************************
 private:
 	GameListNode* m_head;
-	GameListNode* m_current;
+	GameListNode* m_tail;
 	int m_length; //Change this to something less difficult to Read
 };
 
