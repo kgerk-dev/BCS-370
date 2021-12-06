@@ -29,6 +29,7 @@ BST::BST() {
 // Purpose: This function should make a deep copy of the passed in 
 //			binary search tree. The structure of the tree of the copy 
 //			should be exactly the same as the original Tree!!
+// Runtime: Big O(N)
 // 
 // Update Information:
 // ------------------------------------------
@@ -50,6 +51,7 @@ BST::BST(const BST& rhs) {
 // 
 // Purpose: Uses the Helper function Clear to make the BST empty and 
 //			release the memory.
+// Runtime: Big O(N)
 // 
 // Update Information:
 // ------------------------------------------
@@ -67,6 +69,7 @@ BST::~BST() {
 //			Clears the binbary search tree and releases ALL 
 //			dynamically allocated memory. When items 
 //			are removed you MUST release memory.
+// Runtime: Big O(N)
 // 
 // Update Information:
 // ------------------------------------------
@@ -103,6 +106,8 @@ void BST::Clear(TreeNode*& tree) {
 //			new tree to copy and change the structure to match the original
 //			exactly.
 // 
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -157,6 +162,8 @@ void BST::CopyTree(TreeNode*& copyTree, const TreeNode* originalTree)
 //			Finds the node with the highest value in tree. 
 //			The rightmost node in the tree contains the data with 
 //			the highest values.
+//
+// Runtime: Big O(N) 
 // 
 // Update Information:
 // ------------------------------------------
@@ -220,7 +227,9 @@ void BST::GetPredecessorData(TreeNode* tree, Game& data)
 //			Second Function, is the explicit call to return the size of the 
 //			BST from root.
 //			
-//			
+//
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -247,7 +256,8 @@ int BST::Size(TreeNode* tree) {
 // Purpose: Adds a Game object to the BST. It should be addes to the BST by 'Title'
 //			of the game. 
 //			Add(Game g) implicitly calls Add(TreeNode*& tree, Game g)
-//			
+// 
+// Runtime: Big O(N)
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -281,7 +291,9 @@ void BST::Add(TreeNode*& tree, Game g) {
 //			uses a PreOrder Traversal of the BST Recursively.
 //			PreOrder() implicility calls PreOrder(TreeNode* tree).
 //			
-//			
+// 
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -306,7 +318,9 @@ void BST::PreOrder(TreeNode* tree) {
 //			uses a InOrder Traversal of the BST Recursively.
 //			InOrder() implicility calls InOrder(TreeNode* tree).
 //			
-//			
+//		
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -331,7 +345,9 @@ void BST::InOrder(TreeNode* tree) {
 //			uses a PostOrder Traversal of the BST Recursively.
 //			PostOrder() implicility calls PostOrder(TreeNode* tree).
 //			
-//			
+//
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -362,7 +378,8 @@ void BST::PostOrder(TreeNode* tree) {
 //			uses a "Retrieval Search" to find the correct Game object matching the 
 //			string 'name'.
 //			
-//			
+// Runtime: Big O(Log N)
+// 
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -402,7 +419,9 @@ bool BST::GetScore(TreeNode* tree, std::string name, double& price) {
 //			binary tree to another. Making a Deep Copy of the binary tree to
 //			be assigned using the function CopyTree
 //			
-//			
+// 
+// Runtime: Big O(N)
+//
 // Update Information:
 // ------------------------------------------
 //*****************************************************
@@ -437,7 +456,9 @@ BST& BST::operator=(const BST& rhs)
 //			Non-Recursive InOrder Traversal = DepthFirstTraversal
 //			using a Stack Data Structure.
 //			
-//			
+// 
+// Runtime: Big O(N)
+// 
 // Update Information:
 // ------------------------------------------
 // Instead of using the Do While loop I used a While loop with a Stack library
