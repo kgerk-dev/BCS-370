@@ -24,6 +24,12 @@
 // Description:
 //		- Changed Game class into an Unsorted Linked list class for HW3. Updated From
 //		  HW1,HW2.
+// 
+// Name: Kyle Gerken
+// Date: 12/6/2021
+// Description:
+//		- Changed private member values of Game from dynamic
+//		  to static for this HW4
 //
 //***************************************************************************************
 

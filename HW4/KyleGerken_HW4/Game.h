@@ -20,6 +20,12 @@
 // Name: Kyle Gerken
 // Date: 10/29/2021
 //					- For HW3, no changes have been done to Game.h/.cpp as of yet.
+// 
+// Name: Kyle Gerken
+// Date: 12/6/2021
+// Description: 
+//				- Changed private member values of Game from dynamic
+//				  to static for this HW4
 //
 //***************************************************************************************
 #include <iostream>

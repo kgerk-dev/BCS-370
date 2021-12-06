@@ -1,4 +1,13 @@
 #include "BST.h"
+//*****************************************************
+// Function: Binary Search Tree - Default Constructor
+// 
+// Purpose: Creates an empty binary search tree
+// 
+// Update Information:
+// ------------------------------------------
+//*****************************************************
+
 
 //*****************************************************
 // Function: Binary Search Tree - Default Constructor
@@ -381,6 +390,7 @@ bool BST::GetScore(TreeNode* tree, std::string name, double& price) {
 		price = tree->info.GetPrice();
 		return true;
 	}
+	return false;
 }
 
 

@@ -16,6 +16,11 @@ using namespace std;
 // Compiler: Visual C++ 2019
 // 
 // Update Information:
+// Name: Kyle Gerken
+// Date: 12/6/2021
+// Description:
+//			- Transferrred Project from Visual Studio 2019 to Visual Studio 2022.
+//			  Small bug fixes but .sln file compiles correctly after update.
 //*******************************************************
 
 int main() {

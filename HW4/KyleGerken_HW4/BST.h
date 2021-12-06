@@ -5,8 +5,24 @@
 #include <string>
 #include <stack>
 
-// Source for Stack
+// Source for Stack - used in BST.cpp [Line 447-464]
 // https://www.cplusplus.com/reference/stack/stack/
+
+//*******************************************************
+//File: BST.h
+//
+//Purpose: Header file consisting of the Binary Search Tree 
+//		   Member values, member function definitions.
+//		   Included struct of TreeNode for navigating the BST. 
+// 
+// Written By: Kyle Gerken
+// 
+// Compiler: Visual C++ 2019
+// 
+// Update Information:
+//*******************************************************
+
+
 
 struct TreeNode {
 	Game info;
